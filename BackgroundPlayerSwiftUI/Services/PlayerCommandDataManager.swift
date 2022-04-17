@@ -10,7 +10,7 @@ import MediaPlayer
 
 
 enum PlayerCommand: CaseIterable {
-    case back, play, stop, pause, forward
+    case back, togglePausePlay, stop, forward
     
     var remoteCommand: MPRemoteCommand {
         
@@ -18,10 +18,8 @@ enum PlayerCommand: CaseIterable {
         
         switch self {
             
-        case .pause:
-            return remoteCommandCenter.pauseCommand
-        case .play:
-            return remoteCommandCenter.playCommand
+        case .togglePausePlay:
+            return remoteCommandCenter.togglePlayPauseCommand
         case .stop:
             return remoteCommandCenter.stopCommand
         case .forward:

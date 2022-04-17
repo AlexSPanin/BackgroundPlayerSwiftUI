@@ -8,9 +8,16 @@
 import Foundation
 
 struct StaticMetadataModel {
-    let assetURL: URL                   // MPNowPlayingInfoPropertyAssetURL
+    let urlString: String                   // MPNowPlayingInfoPropertyAssetURL
     let title: String                   // MPMediaItemPropertyTitle
-    let artist: String                 // MPMediaItemPropertyArtist
+    let artist: String = "Unkowded"                // MPMediaItemPropertyArtist
+    
+    init(title: String) {
+        self.title = title
+        self.urlString = Bundle.main.url(forResource: title, withExtension: "mp3")?.absoluteString ?? ""
+    }
+    
+    
 }
 
 struct DynamicMetadataModel {

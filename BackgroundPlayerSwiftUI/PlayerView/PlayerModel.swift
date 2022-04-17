@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct ButtonPlayer {
+struct ButtonPlayer: Hashable {
     
     let type: PlayerCommand
     let name: String
@@ -19,18 +19,14 @@ struct ButtonPlayer {
     }
 }
 
-struct PlayerModel {
+struct PlayerModel: Hashable {
     var title = ""
     var passedTime = 0.0
     var leftTime = 0.0
     var currentTime = 0.0
-    var buttons: [ButtonPlayer] {
-        [
-            ButtonPlayer(type: .back, name: "backward"),
-            ButtonPlayer(type: .play, name: "play"),
-            ButtonPlayer(type: .stop, name: "stop"),
-            ButtonPlayer(type: .pause, name: "pause"),
-            ButtonPlayer(type: .forward, name: "forward")
-        ]
+    let buttons: [ButtonPlayer]
+    
+    init(buttons: [ButtonPlayer]) {
+        self.buttons = buttons
     }
 }

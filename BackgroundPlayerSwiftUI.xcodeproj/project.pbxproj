@@ -22,6 +22,7 @@
 		E29331F9280C2A2900B44444 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331F8280C2A2900B44444 /* PlayerView.swift */; };
 		E29331FB280C2AB600B44444 /* AudioFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331FA280C2AB600B44444 /* AudioFileModel.swift */; };
 		E29331FD280C2C7800B44444 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331FC280C2C7800B44444 /* PlayerViewModel.swift */; };
+		E29331FF280C411400B44444 /* AudioFileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331FE280C411400B44444 /* AudioFileDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 		E29331F8280C2A2900B44444 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		E29331FA280C2AB600B44444 /* AudioFileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileModel.swift; sourceTree = "<group>"; };
 		E29331FC280C2C7800B44444 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
+		E29331FE280C411400B44444 /* AudioFileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 			children = (
 				E29331F4280C251800B44444 /* ErrorsDataManager.swift */,
 				E29331F6280C266C00B44444 /* PlayerCommandDataManager.swift */,
+				E29331FE280C411400B44444 /* AudioFileDataManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				E29331FB280C2AB600B44444 /* AudioFileModel.swift in Sources */,
 				E29331F9280C2A2900B44444 /* PlayerView.swift in Sources */,
 				E29331ED280C1EA000B44444 /* PlayerModel.swift in Sources */,
+				E29331FF280C411400B44444 /* AudioFileDataManager.swift in Sources */,
 				E29331D7280C1A4100B44444 /* ContentView.swift in Sources */,
 				E29331F5280C251800B44444 /* ErrorsDataManager.swift in Sources */,
 				E29331D5280C1A4100B44444 /* BackgroundPlayerSwiftUIApp.swift in Sources */,

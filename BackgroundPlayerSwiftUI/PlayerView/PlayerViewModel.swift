@@ -9,13 +9,12 @@ import AVFoundation
 
 class  PlayerViewModel: ObservableObject {
     
-    @Published var audioFilesModels: [AudioFileModel]
+    var audioFilesModels: [AudioFileModel]
     
     var isPlaying = false
     var needsScheduled = true
     
-    
-    
+    @Published var playerButton: PlayerModel!
     
     private var isEmptyAudioFile: Bool
     private var indexAudioFile: Int
@@ -25,12 +24,38 @@ class  PlayerViewModel: ObservableObject {
     private var audioPlayerNode = AVAudioPlayerNode()
     private var audioFile = AVAudioFile()
     
-    init(audioFilesModels: [AudioFileModel]) {
-        self.audioFilesModels = audioFilesModels
+    init() {
+        self.audioFilesModels = AudioFileDataManager.audioFilesModels
         self.indexAudioFile = 0
         self.maxIndexAudioFile = audioFilesModels.count - 1
         isEmptyAudioFile = audioFilesModels.isEmpty
         if !isEmptyAudioFile { prepareAudioFile(audioFileModel: audioFilesModels[indexAudioFile])}
+        settingPlayerButtons()
+    }
+    
+    func settingPlayerButtons() {
+        playerButton = PlayerModel(buttons: [
+            ButtonPlayer(type: .back, name: "backward"),
+            ButtonPlayer(type: .stop, name: "stop"),
+            ButtonPlayer(type: .togglePausePlay, name: isPlaying ? "pause" : "play"),
+            ButtonPlayer(type: .forward, name: "forward")
+        ])
+    }
+    
+    
+    func pressPlayerButtons(button: ButtonPlayer) {
+        switch  button.type {
+       
+        case .back:
+            backButton()
+        case .togglePausePlay:
+            playPauseButton()
+            settingPlayerButtons()
+        case .stop:
+            stopButton()
+        case .forward:
+            forwardButton()
+        }
     }
     
     func playPauseButton() {

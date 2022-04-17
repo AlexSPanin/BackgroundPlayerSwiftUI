@@ -15,6 +15,6 @@ struct AudioFileModel {
     
     init(metadata: StaticMetadataModel) {
         self.metadata = metadata
-        self.url = metadata.assetURL
+        self.url = URL(string: metadata.urlString)!
     }
 }

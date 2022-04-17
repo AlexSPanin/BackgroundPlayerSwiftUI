@@ -8,13 +8,35 @@
 import SwiftUI
 
 struct PlayerView: View {
-    @Static private var 
+    
+    @StateObject private var viewModel = PlayerViewModel()
+
     
     
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        HStack(spacing: 5) {
+            ForEach(viewModel.playerButton.buttons, id: \.self) { button in
+                Button {
+                    viewModel.pressPlayerButtons(button: button)
+                } label: {
+                    Image(button.name)
+                }
+                    
+                }
+                
+            }
+            
+            
+        }
+    
+    
+    
+    
+    
     }
-}
+
+
+
 
 //struct PlayerView_Previews: PreviewProvider {
 //    static var previews: some View {
