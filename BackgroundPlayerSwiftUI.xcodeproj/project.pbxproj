@@ -11,6 +11,14 @@
 		E29331D7280C1A4100B44444 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331D6280C1A4100B44444 /* ContentView.swift */; };
 		E29331D9280C1A4200B44444 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29331D8280C1A4200B44444 /* Assets.xcassets */; };
 		E29331DC280C1A4200B44444 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E29331DB280C1A4200B44444 /* Preview Assets.xcassets */; };
+		E29331E7280C1A8800B44444 /* clarnet_comp_3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E29331E3280C1A8800B44444 /* clarnet_comp_3.mp3 */; };
+		E29331E8280C1A8800B44444 /* clarnet_comp_2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E29331E4280C1A8800B44444 /* clarnet_comp_2.mp3 */; };
+		E29331E9280C1A8800B44444 /* clarnet_comp_1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E29331E5280C1A8800B44444 /* clarnet_comp_1.mp3 */; };
+		E29331EA280C1A8800B44444 /* clarnet_comp_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E29331E6280C1A8800B44444 /* clarnet_comp_4.mp3 */; };
+		E29331ED280C1EA000B44444 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331EC280C1EA000B44444 /* PlayerModel.swift */; };
+		E29331F2280C23F600B44444 /* MetadataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331F1280C23F600B44444 /* MetadataModel.swift */; };
+		E29331F5280C251800B44444 /* ErrorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331F4280C251800B44444 /* ErrorsDataManager.swift */; };
+		E29331F7280C266C00B44444 /* PlayerCommandDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331F6280C266C00B44444 /* PlayerCommandDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +27,14 @@
 		E29331D6280C1A4100B44444 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		E29331D8280C1A4200B44444 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E29331DB280C1A4200B44444 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		E29331E3280C1A8800B44444 /* clarnet_comp_3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clarnet_comp_3.mp3; sourceTree = "<group>"; };
+		E29331E4280C1A8800B44444 /* clarnet_comp_2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clarnet_comp_2.mp3; sourceTree = "<group>"; };
+		E29331E5280C1A8800B44444 /* clarnet_comp_1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clarnet_comp_1.mp3; sourceTree = "<group>"; };
+		E29331E6280C1A8800B44444 /* clarnet_comp_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clarnet_comp_4.mp3; sourceTree = "<group>"; };
+		E29331EC280C1EA000B44444 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
+		E29331F1280C23F600B44444 /* MetadataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataModel.swift; sourceTree = "<group>"; };
+		E29331F4280C251800B44444 /* ErrorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsDataManager.swift; sourceTree = "<group>"; };
+		E29331F6280C266C00B44444 /* PlayerCommandDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCommandDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -51,9 +67,13 @@
 		E29331D3280C1A4100B44444 /* BackgroundPlayerSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				E29331F0280C23D400B44444 /* Models */,
+				E29331EB280C1E5D00B44444 /* PlayerView */,
 				E29331D4280C1A4100B44444 /* BackgroundPlayerSwiftUIApp.swift */,
+				E29331F3280C24E400B44444 /* Services */,
 				E29331D6280C1A4100B44444 /* ContentView.swift */,
 				E29331D8280C1A4200B44444 /* Assets.xcassets */,
+				E29331E2280C1A5D00B44444 /* Files */,
 				E29331DA280C1A4200B44444 /* Preview Content */,
 			);
 			path = BackgroundPlayerSwiftUI;
@@ -65,6 +85,42 @@
 				E29331DB280C1A4200B44444 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		E29331E2280C1A5D00B44444 /* Files */ = {
+			isa = PBXGroup;
+			children = (
+				E29331E5280C1A8800B44444 /* clarnet_comp_1.mp3 */,
+				E29331E4280C1A8800B44444 /* clarnet_comp_2.mp3 */,
+				E29331E3280C1A8800B44444 /* clarnet_comp_3.mp3 */,
+				E29331E6280C1A8800B44444 /* clarnet_comp_4.mp3 */,
+			);
+			path = Files;
+			sourceTree = "<group>";
+		};
+		E29331EB280C1E5D00B44444 /* PlayerView */ = {
+			isa = PBXGroup;
+			children = (
+				E29331EC280C1EA000B44444 /* PlayerModel.swift */,
+			);
+			path = PlayerView;
+			sourceTree = "<group>";
+		};
+		E29331F0280C23D400B44444 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				E29331F1280C23F600B44444 /* MetadataModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E29331F3280C24E400B44444 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				E29331F4280C251800B44444 /* ErrorsDataManager.swift */,
+				E29331F6280C266C00B44444 /* PlayerCommandDataManager.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -125,8 +181,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E29331E8280C1A8800B44444 /* clarnet_comp_2.mp3 in Resources */,
 				E29331DC280C1A4200B44444 /* Preview Assets.xcassets in Resources */,
+				E29331E9280C1A8800B44444 /* clarnet_comp_1.mp3 in Resources */,
 				E29331D9280C1A4200B44444 /* Assets.xcassets in Resources */,
+				E29331EA280C1A8800B44444 /* clarnet_comp_4.mp3 in Resources */,
+				E29331E7280C1A8800B44444 /* clarnet_comp_3.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,7 +197,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E29331F7280C266C00B44444 /* PlayerCommandDataManager.swift in Sources */,
+				E29331F2280C23F600B44444 /* MetadataModel.swift in Sources */,
+				E29331ED280C1EA000B44444 /* PlayerModel.swift in Sources */,
 				E29331D7280C1A4100B44444 /* ContentView.swift in Sources */,
+				E29331F5280C251800B44444 /* ErrorsDataManager.swift in Sources */,
 				E29331D5280C1A4100B44444 /* BackgroundPlayerSwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -275,6 +339,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,6 +369,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
