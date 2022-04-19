@@ -17,12 +17,13 @@
 		E29331EA280C1A8800B44444 /* clarnet_comp_4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E29331E6280C1A8800B44444 /* clarnet_comp_4.mp3 */; };
 		E29331ED280C1EA000B44444 /* PlayerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331EC280C1EA000B44444 /* PlayerModel.swift */; };
 		E29331F2280C23F600B44444 /* MetadataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331F1280C23F600B44444 /* MetadataModel.swift */; };
-		E29331F5280C251800B44444 /* ErrorsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331F4280C251800B44444 /* ErrorsDataManager.swift */; };
-		E29331F7280C266C00B44444 /* PlayerCommandDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331F6280C266C00B44444 /* PlayerCommandDataManager.swift */; };
+		E29331F7280C266C00B44444 /* PlayerCommandManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331F6280C266C00B44444 /* PlayerCommandManager.swift */; };
 		E29331F9280C2A2900B44444 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331F8280C2A2900B44444 /* PlayerView.swift */; };
 		E29331FB280C2AB600B44444 /* AudioFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331FA280C2AB600B44444 /* AudioFileModel.swift */; };
 		E29331FD280C2C7800B44444 /* PlayerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331FC280C2C7800B44444 /* PlayerViewModel.swift */; };
 		E29331FF280C411400B44444 /* AudioFileDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E29331FE280C411400B44444 /* AudioFileDataManager.swift */; };
+		E2933201280C510900B44444 /* TimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2933200280C510900B44444 /* TimeManager.swift */; };
+		E2933203280D577F00B44444 /* PlayerMetadataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E2933202280D577F00B44444 /* PlayerMetadataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,12 +38,14 @@
 		E29331E6280C1A8800B44444 /* clarnet_comp_4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = clarnet_comp_4.mp3; sourceTree = "<group>"; };
 		E29331EC280C1EA000B44444 /* PlayerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerModel.swift; sourceTree = "<group>"; };
 		E29331F1280C23F600B44444 /* MetadataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataModel.swift; sourceTree = "<group>"; };
-		E29331F4280C251800B44444 /* ErrorsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorsDataManager.swift; sourceTree = "<group>"; };
-		E29331F6280C266C00B44444 /* PlayerCommandDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCommandDataManager.swift; sourceTree = "<group>"; };
+		E29331F6280C266C00B44444 /* PlayerCommandManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCommandManager.swift; sourceTree = "<group>"; };
 		E29331F8280C2A2900B44444 /* PlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerView.swift; sourceTree = "<group>"; };
 		E29331FA280C2AB600B44444 /* AudioFileModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileModel.swift; sourceTree = "<group>"; };
 		E29331FC280C2C7800B44444 /* PlayerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewModel.swift; sourceTree = "<group>"; };
 		E29331FE280C411400B44444 /* AudioFileDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioFileDataManager.swift; sourceTree = "<group>"; };
+		E2933200280C510900B44444 /* TimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeManager.swift; sourceTree = "<group>"; };
+		E2933202280D577F00B44444 /* PlayerMetadataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerMetadataManager.swift; sourceTree = "<group>"; };
+		E2933204280DD2D200B44444 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +78,7 @@
 		E29331D3280C1A4100B44444 /* BackgroundPlayerSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				E2933204280DD2D200B44444 /* Info.plist */,
 				E29331D4280C1A4100B44444 /* BackgroundPlayerSwiftUIApp.swift */,
 				E29331D6280C1A4100B44444 /* ContentView.swift */,
 				E29331EB280C1E5D00B44444 /* PlayerView */,
@@ -128,9 +132,10 @@
 		E29331F3280C24E400B44444 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				E29331F4280C251800B44444 /* ErrorsDataManager.swift */,
-				E29331F6280C266C00B44444 /* PlayerCommandDataManager.swift */,
+				E29331F6280C266C00B44444 /* PlayerCommandManager.swift */,
+				E2933202280D577F00B44444 /* PlayerMetadataManager.swift */,
 				E29331FE280C411400B44444 /* AudioFileDataManager.swift */,
+				E2933200280C510900B44444 /* TimeManager.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -210,14 +215,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				E29331FD280C2C7800B44444 /* PlayerViewModel.swift in Sources */,
-				E29331F7280C266C00B44444 /* PlayerCommandDataManager.swift in Sources */,
+				E29331F7280C266C00B44444 /* PlayerCommandManager.swift in Sources */,
 				E29331F2280C23F600B44444 /* MetadataModel.swift in Sources */,
+				E2933203280D577F00B44444 /* PlayerMetadataManager.swift in Sources */,
 				E29331FB280C2AB600B44444 /* AudioFileModel.swift in Sources */,
 				E29331F9280C2A2900B44444 /* PlayerView.swift in Sources */,
+				E2933201280C510900B44444 /* TimeManager.swift in Sources */,
 				E29331ED280C1EA000B44444 /* PlayerModel.swift in Sources */,
 				E29331FF280C411400B44444 /* AudioFileDataManager.swift in Sources */,
 				E29331D7280C1A4100B44444 /* ContentView.swift in Sources */,
-				E29331F5280C251800B44444 /* ErrorsDataManager.swift in Sources */,
 				E29331D5280C1A4100B44444 /* BackgroundPlayerSwiftUIApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +356,7 @@
 				DEVELOPMENT_TEAM = QD5349NP78;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BackgroundPlayerSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -381,6 +388,7 @@
 				DEVELOPMENT_TEAM = QD5349NP78;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = BackgroundPlayerSwiftUI/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

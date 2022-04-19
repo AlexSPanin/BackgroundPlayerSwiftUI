@@ -1,5 +1,5 @@
 //
-//  PlayerCommandDataManager.swift
+//  PlayerCommand.swift
 //  BackgroundPlayerSwiftUI
 //
 //  Created by Александр Панин on 17.04.2022.
@@ -33,8 +33,12 @@ enum PlayerCommand: CaseIterable {
         remoteCommand.removeTarget(nil)
     }
     
-    func setDisabled(_ isDisabled: Bool) {
-        remoteCommand.isEnabled = !isDisabled
+    func addHandler(_ handler: @escaping (PlayerCommand, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus) {
+        remoteCommand.addTarget { handler(self, $0) }
+    }
+    
+    func setEnabled(_ isEnabled: Bool) {
+        remoteCommand.isEnabled = isEnabled
     }
 }
 

@@ -11,6 +11,7 @@ struct StaticMetadataModel {
     let urlString: String                   // MPNowPlayingInfoPropertyAssetURL
     let title: String                   // MPMediaItemPropertyTitle
     let artist: String = "Unkowded"                // MPMediaItemPropertyArtist
+    let image: String = "airtag"
     
     init(title: String) {
         self.title = title
