@@ -20,8 +20,9 @@ extension DateComponentsFormatter {
 
 struct TimeManager {
     
-    static func timeFormated(to time: Double) -> String {
-        DateComponentsFormatter.audioTime.string(from: time) ?? "00:00"
+    static func timeFormated(to time: Float) -> String {
+        let time = TimeInterval(time)
+        return DateComponentsFormatter.audioTime.string(from: time) ?? "00:00"
     }
 }
 

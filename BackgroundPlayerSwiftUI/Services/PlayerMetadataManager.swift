@@ -16,7 +16,6 @@ struct PlayerMetadataManager {
         let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
         var nowPlayingInfo = [String: Any]()
         
-        NSLog("%@", "**** Set track metadata: title \(metadata.title)")
         //        nowPlayingInfo[MPNowPlayingInfoPropertyAssetURL] = metadata.assetURL
         //        nowPlayingInfo[MPNowPlayingInfoPropertyMediaType] = metadata.mediaType.rawValue
         //        nowPlayingInfo[MPNowPlayingInfoPropertyIsLiveStream] = metadata.isLiveStream
@@ -40,8 +39,7 @@ struct PlayerMetadataManager {
         
         let nowPlayingInfoCenter = MPNowPlayingInfoCenter.default()
         var nowPlayingInfo = nowPlayingInfoCenter.nowPlayingInfo ?? [String: Any]()
-        
-        NSLog("%@", "**** Set playback info: rate \(metadata.rate), position \(metadata.position), duration \(metadata.duration)")
+    
         nowPlayingInfo[MPMediaItemPropertyPlaybackDuration] = metadata.duration
         nowPlayingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = metadata.position
         nowPlayingInfo[MPNowPlayingInfoPropertyPlaybackRate] = metadata.rate

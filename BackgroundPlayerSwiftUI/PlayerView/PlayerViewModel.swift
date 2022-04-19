@@ -8,15 +8,6 @@
 import AVFoundation
 import MediaPlayer
 
-//class AppDelegate: NSObject, UIApplicationDelegate {
-//
-//    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
-//        application.beginReceivingRemoteControlEvents()
-//        return true
-//
-//    }
-//}
-
 class  PlayerViewModel: ObservableObject {
     
     @Published var playerModel: PlayerModel!
@@ -24,14 +15,14 @@ class  PlayerViewModel: ObservableObject {
     let audioFilesModels: [AudioFileModel]
     let maxIndexAudioFile: Int
     
-    
+   
     private var sessionObserver: NSObjectProtocol!
     //    private var isEmptyAudioFile: Bool
-    private var isPlaying = false
+    @Published var isPlaying = false
     {
         didSet
         {
-            settingPlayerButtons()
+            changePlayButton()
         }
     }
     
@@ -39,6 +30,7 @@ class  PlayerViewModel: ObservableObject {
     private var audioEngine = AVAudioEngine()
     private var audioPlayerNode = AVAudioPlayerNode()
     private var audioFile = AVAudioFile()
+    private var displayLink = CADisplayLink()
     
     init() {
         self.audioFilesModels = AudioFileDataManager.audioFilesModels
@@ -49,6 +41,7 @@ class  PlayerViewModel: ObservableObject {
         
         prepareAudioFile(audioFileModel: audioFilesModels[indexAudioFile])
         prepareEngine()
+        setupDisplayLink()
         
         do {
             try setupObservel()
@@ -81,23 +74,14 @@ class  PlayerViewModel: ObservableObject {
         case .forward:
             forwardButton()
             PlayerMetadataManager.setStaticMetadata(audioFilesModels[indexAudioFile].metadata)
+        case .changePlaybackPosition:
+            guard let event = event as? MPChangePlaybackPositionCommandEvent else { return .commandFailed}
+            changePlaybackPosition(to: event.positionTime)
         }
         return .success
     }
     
-    func handlePlaybackChange() {
-        let rate = audioPlayerNode.rate
-        guard let nodeTime = audioPlayerNode.lastRenderTime else { return }
-        guard let playerTime = audioPlayerNode.playerTime(forNodeTime: nodeTime) else { return }
-        let position = Float(playerTime.sampleTime) / Float(playerTime.sampleRate)
-        let duration = Float(audioFile.length) / Float(audioFile.fileFormat.sampleRate) - position
-        
-        let metadata = DynamicMetadataModel(rate: rate,
-                                            position: position,
-                                            duration: duration)
-        PlayerMetadataManager.setDinamicMetadata(metadata)
-        
-    }
+    
     
     func setupObservel() throws {
         
@@ -156,6 +140,49 @@ class  PlayerViewModel: ObservableObject {
     }
     
 }
+
+//MARK: - Display Link
+extension PlayerViewModel {
+    
+    private func setupDisplayLink() {
+        displayLink = CADisplayLink(target: self, selector: #selector(updateDisplay))
+        displayLink.add(to: .current, forMode: .default)
+        displayLink.preferredFrameRateRange = CAFrameRateRange(minimum: 30, maximum: 50, __preferred: 30)
+        displayLink.isPaused = true
+    }
+    
+    @objc func updateDisplay() {
+        let length = Float(audioFile.length) / Float(audioFile.fileFormat.sampleRate)
+        if playerModel.passedTime < length {
+        
+        let rate = audioPlayerNode.rate
+        guard let nodeTime = audioPlayerNode.lastRenderTime else {
+            print("Error Node Time")
+            return }
+        guard let playerTime = audioPlayerNode.playerTime(forNodeTime: nodeTime) else {
+            print("Error playerTime")
+            return }
+        let position = Float(playerTime.sampleTime) / Float(playerTime.sampleRate)
+       
+        
+        playerModel.passedTime = position + playerModel.seekTime
+        playerModel.leftTime = length - playerModel.passedTime
+        
+
+        
+        let metadata = DynamicMetadataModel(rate: rate,
+                                            position: playerModel.passedTime,
+                                            duration: length)
+        PlayerMetadataManager.setDinamicMetadata(metadata)
+        } else {
+            
+            stopButton()
+            
+           
+        }
+    }
+}
+
 //MARK: - PlayerButtons
 extension PlayerViewModel {
     
@@ -169,6 +196,8 @@ extension PlayerViewModel {
             stopButton()
         case .forward:
             forwardButton()
+        case .changePlaybackPosition:
+            changePlaybackPosition(to: 10)
         }
     }
     
@@ -181,57 +210,124 @@ extension PlayerViewModel {
         ])
     }
     
+    private func changePlayButton() {
+        let name =  isPlaying ? "pause" : "play"
+        playerModel.buttons[2].changeName(to: name)
+    }
+    
     private func playPauseButton() {
         
         switch isPlaying {
             
         case true:
+            displayLink.isPaused = true
             isPlaying.toggle()
             audioPlayerNode.pause()
             audioEngine.pause()
-            //         closeAudioSession()
         case false:
             isPlaying.toggle()
-            //         setupAudioSession()
             startEngine()
+            displayLink.isPaused = false
             if needsScheduled { scheduleAudioFile() }
             audioPlayerNode.play()
         }
     }
     
     private func stopButton() {
+        displayLink.isPaused = true
         audioPlayerNode.stop()
-        audioEngine.stop()
-        //       closeAudioSession()
-        isPlaying = false
+   //     audioEngine.stop()
         needsScheduled = true
+        playerModel.passedTime = 0
+        playerModel.seekTime = 0
+        playerModel.leftTime = Float(audioFile.length) / Float(audioFile.fileFormat.sampleRate)
+        isPlaying = false
+        displayLink.isPaused = true
+        
     }
     
     private func backButton() {
+        displayLink.isPaused = true
         if indexAudioFile != 0 {
             let wasPlaing = isPlaying
             if isPlaying { stopButton() }
             indexAudioFile -= 1
-            audioEngine.reset()
+     //       audioEngine.reset()
             prepareAudioFile(audioFileModel: audioFilesModels[indexAudioFile])
-            prepareEngine()
+      //      prepareEngine()
             needsScheduled = true
+            playerModel.passedTime = 0
+            playerModel.seekTime = 0
+            playerModel.leftTime = Float(audioFile.length) / Float(audioFile.fileFormat.sampleRate)
             if wasPlaing { playPauseButton() }
         }
     }
     
     private func forwardButton() {
+  
         if indexAudioFile < maxIndexAudioFile {
             let wasPlaing = isPlaying
             if isPlaying { stopButton() }
             indexAudioFile += 1
-            audioEngine.reset()
+    //        audioEngine.reset()
             prepareAudioFile(audioFileModel: audioFilesModels[indexAudioFile])
-            prepareEngine()
+     //       prepareEngine()
             needsScheduled = true
+            playerModel.passedTime = 0
+            playerModel.seekTime = 0
+            playerModel.leftTime = Float(audioFile.length) / Float(audioFile.fileFormat.sampleRate)
             if wasPlaing { playPauseButton() }
         }
     }
+    
+    private func changePlaybackPosition(to position: TimeInterval) {
+
+        seekPlaybackPosition(to: position - Double(playerModel.passedTime))
+  
+    }
+    
+    private func seekPlaybackPosition(to time: TimeInterval) {
+        
+      
+        displayLink.isPaused = true
+   //     audioEngine.pause()
+        audioPlayerNode.stop()
+
+        let length = Float(audioFile.length) / Float(audioFile.fileFormat.sampleRate)
+        playerModel.seekTime = (Float(time) + playerModel.passedTime)
+      
+        playerModel.passedTime = playerModel.seekTime
+        playerModel.leftTime = length - playerModel.passedTime
+        
+        scheduleAudioFile()
+ 
+//        startEngine()
+        if isPlaying { audioPlayerNode.play() }
+        displayLink.isPaused = false
+        
+        
+        
+    }
+    
+    private func scheduleAudioFile() {
+
+        let sampleRate = audioFile.fileFormat.sampleRate
+
+        let startSample = AVAudioFramePosition(Double(playerModel.passedTime) * sampleRate)
+        let countSample = AVAudioFrameCount(audioFile.length - startSample)
+        audioPlayerNode.scheduleSegment(audioFile,
+                                        startingFrame: startSample,
+                                        frameCount: countSample,
+                                        at: nil)
+        needsScheduled = false
+
+    }
+    
+//    private func scheduleAudioFile() {
+//        audioPlayerNode.scheduleFile(audioFile, at: nil)
+//        needsScheduled = false
+//    }
+    
 }
 
 //MARK: - AudioFile
@@ -246,10 +342,8 @@ extension PlayerViewModel {
         }
     }
     
-    private func scheduleAudioFile() {
-        audioPlayerNode.scheduleFile(audioFile, at: nil)
-        needsScheduled = false
-    }
+   
+   
 }
 
 //MARK: - AudioEngine
@@ -267,6 +361,7 @@ extension PlayerViewModel {
         audioEngine.attach(audioPlayerNode)
         audioEngine.connect(audioPlayerNode, to: audioEngine.mainMixerNode , format: audioFile.processingFormat)
         audioEngine.prepare()
+     
     }
 }
 
