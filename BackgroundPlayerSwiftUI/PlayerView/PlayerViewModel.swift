@@ -14,10 +14,9 @@ class  PlayerViewModel: ObservableObject {
     @Published var indexAudioFile: Int
     let audioFilesModels: [AudioFileModel]
     let maxIndexAudioFile: Int
-    
-   
+
     private var sessionObserver: NSObjectProtocol!
-    //    private var isEmptyAudioFile: Bool
+    
     @Published var isPlaying = false
     {
         didSet
@@ -50,7 +49,6 @@ class  PlayerViewModel: ObservableObject {
         catch {
             print("ERROR setupRemoteComande")
         }
-        //      handlePlaybackChange()
     }
     
     func setupRemoteComande(commandHandler: @escaping (PlayerCommand, MPRemoteCommandEvent) -> MPRemoteCommandHandlerStatus) throws {
@@ -163,13 +161,10 @@ extension PlayerViewModel {
             print("Error playerTime")
             return }
         let position = Float(playerTime.sampleTime) / Float(playerTime.sampleRate)
-       
-        
+ 
         playerModel.passedTime = position + playerModel.seekTime
         playerModel.leftTime = length - playerModel.passedTime
-        
 
-        
         let metadata = DynamicMetadataModel(rate: rate,
                                             position: playerModel.passedTime,
                                             duration: length)
@@ -177,8 +172,8 @@ extension PlayerViewModel {
         } else {
             
             stopButton()
-            
-           
+            PlayerMetadataManager.setStaticMetadata(audioFilesModels[indexAudioFile].metadata)
+
         }
     }
 }
@@ -236,7 +231,6 @@ extension PlayerViewModel {
     private func stopButton() {
         displayLink.isPaused = true
         audioPlayerNode.stop()
-   //     audioEngine.stop()
         needsScheduled = true
         playerModel.passedTime = 0
         playerModel.seekTime = 0
@@ -252,9 +246,7 @@ extension PlayerViewModel {
             let wasPlaing = isPlaying
             if isPlaying { stopButton() }
             indexAudioFile -= 1
-     //       audioEngine.reset()
             prepareAudioFile(audioFileModel: audioFilesModels[indexAudioFile])
-      //      prepareEngine()
             needsScheduled = true
             playerModel.passedTime = 0
             playerModel.seekTime = 0
@@ -269,9 +261,7 @@ extension PlayerViewModel {
             let wasPlaing = isPlaying
             if isPlaying { stopButton() }
             indexAudioFile += 1
-    //        audioEngine.reset()
             prepareAudioFile(audioFileModel: audioFilesModels[indexAudioFile])
-     //       prepareEngine()
             needsScheduled = true
             playerModel.passedTime = 0
             playerModel.seekTime = 0
@@ -290,7 +280,6 @@ extension PlayerViewModel {
         
       
         displayLink.isPaused = true
-   //     audioEngine.pause()
         audioPlayerNode.stop()
 
         let length = Float(audioFile.length) / Float(audioFile.fileFormat.sampleRate)
@@ -301,7 +290,6 @@ extension PlayerViewModel {
         
         scheduleAudioFile()
  
-//        startEngine()
         if isPlaying { audioPlayerNode.play() }
         displayLink.isPaused = false
         
@@ -322,11 +310,6 @@ extension PlayerViewModel {
         needsScheduled = false
 
     }
-    
-//    private func scheduleAudioFile() {
-//        audioPlayerNode.scheduleFile(audioFile, at: nil)
-//        needsScheduled = false
-//    }
     
 }
 
